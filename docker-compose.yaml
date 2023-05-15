@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: fastapi-app
+    env_file:
+      - .env
+      # Load them to workflow env from github secrets before deploying
+    ports:
+      - 8000:8000
+    volumes:
+      - type: bind
+        source: ./api # Change source based on the instance
+        target: /api
+      #   - type: bind
+      #     source: /home/asterios/logs # Change source based on the instance
+      #     target: /api/logs
+
+
