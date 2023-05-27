@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import os
 
-DB_CONN_STRING = os.environ["MONGODB_CONN_STRING"]
+DB_CONN_STRING = os.environ.get("MONGODB_CONN_STRING")
 
 def get_db_connection():
     """
