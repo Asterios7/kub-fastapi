@@ -3,13 +3,13 @@
 # A Bot for Twitter API v2
 
 [**Overview**](#overview)
-| [**Postman Documentation**](#postman)
+| [**Requirements**](#requierements)
 
 ## Overview<a id="overview"></a>
 
 A fastapi app deployed with Kubernetes
 
-## Requierements
+## Requierements<a id="requierements"></a>
 
 Things to install
 
