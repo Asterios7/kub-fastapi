@@ -9,7 +9,7 @@
 
 A fastapi app deployed with Kubernetes
 
-## Requierements<a id="requierements"></a>
+## Requirements<a id="requierements"></a>
 
 Things to install
 
