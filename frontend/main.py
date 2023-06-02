@@ -14,4 +14,4 @@ if uploaded_file is not None:
 
     boxed_image = post_request_faceDetector(image=image)
 
-st.image(boxed_image, caption='Boxed Image')
+    st.image(boxed_image, caption='Boxed Image')

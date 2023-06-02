@@ -4,7 +4,7 @@ services:
   # Backend 
   fastapi-app:
     build:
-      context: ./api
+      context: ./backend
       dockerfile: Dockerfile
     container_name: fastapi-app
     env_file:
@@ -17,6 +17,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: streamlit-app
+    environment:
+      TOKEN_KEY: 'shouldbeverysecure'
     ports:
       - 8501:8501
     volumes:
