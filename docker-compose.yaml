@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: streamlit-app
     environment:
-      BACKEND_ADDRESS: fastapi-app
+      BACKEND_ADDRESS: "fastapi-app:8000"
     ports:
       - 8501:8501
     volumes:
