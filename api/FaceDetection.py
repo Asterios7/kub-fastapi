@@ -9,7 +9,7 @@ class FaceDetection:
     def __init__(self) -> None:
         pass
 
-    def detect_mtcnn(self, image: np.ndarray) -> np.ndarray:
+    def detect_face_mtcnn(self, image: np.ndarray) -> np.ndarray:
 
         detector = MTCNN()
         faces = detector.detect_faces(image)
@@ -23,7 +23,7 @@ class FaceDetection:
 
         return image
 
-    def detect_dlib(self, image: np.ndarray) -> np.ndarray:
+    def detect_face_dlib(self, image: np.ndarray) -> np.ndarray:
 
         detector = FaceDetector.build_model('dlib')
         faces = FaceDetector.detect_faces(detector, 'dlib', image)

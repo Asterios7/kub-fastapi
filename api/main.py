@@ -45,8 +45,7 @@ async def do_task(image_file: UploadFile = File(...)):
 
     image = decode_image(contents)
 
-    boxed_image = detector.detect_dlib(image=image)
-
+    boxed_image = detector.detect_face_dlib(image=image)
     boxed_image_bytes = encode_image(boxed_image)
 
     return StreamingResponse(io.BytesIO(boxed_image_bytes), 
