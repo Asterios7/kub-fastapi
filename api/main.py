@@ -1,9 +1,9 @@
 from fastapi import FastAPI, UploadFile, File
-from pydantic import BaseModel
-from util_funcs import convert_image_to_array
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel, Field
+from util_funcs import decode_image, encode_image
 from FaceDetection import FaceDetection
-import cv2
-
+import io
 
 
 class TaskIn(BaseModel):
@@ -14,8 +14,17 @@ class TaskOut(BaseModel):
     message: str
 
 
+class Image(BaseModel):
+    format: str = Field(..., description="Image format (e.g., JPEG, PNG)")
+    data: bytes = Field(..., description="Image data as bytes")
+
+
+class FaceDetectionOut(BaseModel):
+    image: Image
+
+
 app = FastAPI()
-detector = FaceDetection(model="Dlib")
+detector = FaceDetection()
 
 @app.get('/')
 async def get_root():
@@ -26,19 +35,19 @@ async def get_root():
 async def do_task(request: TaskIn):
     my_string = request.my_string
 
-
     return {"message": my_string}
 
 
-@app.post('/faceDetection')
+@app.post('/faceDetection', response_model=FaceDetectionOut)
 async def do_task(image_file: UploadFile = File(...)):
 
     contents = await image_file.read()
 
-    image = convert_image_to_array(contents)
+    image = decode_image(contents)
 
-    new_image = detector.detect_dlib(image=image)
-    
-    print(new_image)
-    cv2.imwrite('test_dlib2.jpg', new_image)
-    return {"message": "Success"}
+    boxed_image = detector.detect_dlib(image=image)
+
+    boxed_image_bytes = encode_image(boxed_image)
+
+    return StreamingResponse(io.BytesIO(boxed_image_bytes), 
+                             media_type="image/jpeg")
