@@ -16,4 +16,6 @@ EXPOSE 8000
 
 ENTRYPOINT ["uvicorn"]
 
+# CMD ["main:app", "--host", "0.0.0.0"]
+
 CMD ["main:app", "--host", "0.0.0.0", "--reload"]
