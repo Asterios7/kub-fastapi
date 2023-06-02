@@ -13,5 +13,5 @@ spec:
         app: backend
     spec:
       containers:
-        - name: fastapi
-          image: asterios7/kub-fastapi:latest
+        - name: backend-fastapi
+          image: asterios7/kub-backend:latest
