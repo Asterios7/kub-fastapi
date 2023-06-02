@@ -1,8 +1,12 @@
 import requests
+import os
+
+IP_ADDRESS = os.environ.get('BACKEND_ADDRESS')
+
 
 def post_request_faceDetector(image: bytes):
 
-    url = 'http://fastapi-app:8000/faceDetection'
+    url = f'http://{IP_ADDRESS}/faceDetection'
 
     # Send the POST request with the player name and image file
     response = requests.post(url,
