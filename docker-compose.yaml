@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: streamlit-app
     environment:
-      TOKEN_KEY: 'shouldbeverysecure'
+      BACKEND_ADDRESS: fastapi-app
     ports:
       - 8501:8501
     volumes:
