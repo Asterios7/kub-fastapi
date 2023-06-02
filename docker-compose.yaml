@@ -3,8 +3,8 @@ version: "3"
 services:
   fastapi-app:
     build:
-      context: .
-      dockerfile: Dockerfile.dev
+      context: ./api
+      dockerfile: Dockerfile
     container_name: fastapi-app
     env_file:
       - .env
@@ -15,8 +15,3 @@ services:
       - type: bind
         source: ./api # Change source based on the instance
         target: /api
-      #   - type: bind
-      #     source: /home/asterios/logs # Change source based on the instance
-      #     target: /api/logs
-
-
