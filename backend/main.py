@@ -1,8 +1,8 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
-from util_funcs import decode_image, encode_image
-from FaceDetection import FaceDetection
+from .util_funcs import decode_image, encode_image
+from .FaceDetection import FaceDetection
 import io
 
 
@@ -39,7 +39,7 @@ async def do_task(request: TaskIn):
 
 
 @app.post('/faceDetection', response_model=FaceDetectionOut)
-async def do_task(image_file: UploadFile = File(...)):
+async def detect_face(image_file: UploadFile = File(...)):
 
     contents = await image_file.read()
 
