@@ -26,6 +26,7 @@ class FaceDetectionOut(BaseModel):
 app = FastAPI()
 detector = FaceDetection()
 
+
 @app.get('/')
 async def get_root():
     return "Welcome to my Python API!!!"
@@ -48,5 +49,5 @@ async def detect_face(image_file: UploadFile = File(...)):
     boxed_image = detector.detect_face_dlib(image=image)
     boxed_image_bytes = encode_image(boxed_image)
 
-    return StreamingResponse(io.BytesIO(boxed_image_bytes), 
+    return StreamingResponse(io.BytesIO(boxed_image_bytes),
                              media_type="image/jpeg")
