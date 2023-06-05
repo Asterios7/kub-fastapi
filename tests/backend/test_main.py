@@ -8,10 +8,7 @@ client = TestClient(app)
 
 @pytest.mark.parametrize("image_path, status_code", [
     ('tests/data/test_image.jpg', 200)])
-
-
 def test_detect_face(image_path, status_code):
-    
     # Create a sample image file
     image = cv2.imread(image_path)
     _, img_bytes = cv2.imencode('.jpg', image)
@@ -22,4 +19,3 @@ def test_detect_face(image_path, status_code):
     # Perform assertions on the response
     assert response.status_code == status_code
     assert response.headers["content-type"] == "image/jpeg"
-
