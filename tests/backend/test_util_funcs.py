@@ -1,5 +1,5 @@
 import cv2
-import numpy
+import numpy as np
 from backend.util_funcs import (decode_image,
                                 encode_image)
 
@@ -10,10 +10,10 @@ image_bytes= img_bytes.tobytes()
 
 
 def test_decode_image():
-    decoded_image = decode_image(image_bytes)
-    assert type(decoded_image) == numpy.ndarray
+    result = decode_image(image_bytes)
+    assert isinstance(result, np.ndarray)
 
 
 def test_encode_image():
-    encoded_image = encode_image(image)
-    assert type(encoded_image) == bytes
+    result = encode_image(image)
+    assert isinstance(result, bytes)
