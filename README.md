@@ -1,4 +1,4 @@
-![Tests]https://github.com/Asterios7/kub-fastapi/actions/workflows/tests.yaml/badge.svg
+![Tests](https://github.com/Asterios7/kub-fastapi/actions/workflows/tests.yaml/badge.svg)
 
 # Fastapi - Kubernetes
 
