@@ -1,3 +1,5 @@
+https://github.com/Asterios7/kub-fastapi/actions/workflows/Tests/badge.svg
+
 # Fastapi - Kubernetes
 
 
