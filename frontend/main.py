@@ -1,6 +1,8 @@
 import streamlit as st
 from backend_requests import post_request_faceDetector
 
+st.title("Face Detection")
+
 # Create a file uploader widget
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
@@ -10,8 +12,11 @@ if uploaded_file is not None:
     image = uploaded_file.read()
     
     # Display the uploaded image
-    st.image(image, caption='Uploaded Image')
+    col1, col2 = st.columns(2)
+    with col1:
+        st.image(image, caption='Uploaded Image')
 
     boxed_image = post_request_faceDetector(image=image)
 
-    st.image(boxed_image, caption='Boxed Image')
+    with col2:
+        st.image(boxed_image, caption='Boxed Image')
