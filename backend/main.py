@@ -1,53 +1,36 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
-from .util_funcs import decode_image, encode_image
-from .FaceDetection import FaceDetection
-import io
+from dlib_wrapper import dlibFaceProcessor
+from PIL import Image
+from io import BytesIO
+import numpy as np
+from helper_functions import draw_face_boxes
 
 
-class TaskIn(BaseModel):
-    my_string: str
-
-
-class TaskOut(BaseModel):
-    message: str
-
-
-class Image(BaseModel):
+class FaceDetectionResponse(BaseModel):
     format: str = Field(..., description="Image format (e.g., JPEG, PNG)")
     data: bytes = Field(..., description="Image data as bytes")
 
 
-class FaceDetectionOut(BaseModel):
-    image: Image
-
-
 app = FastAPI()
-detector = FaceDetection()
+face_processor = dlibFaceProcessor()
 
 
 @app.get('/')
 async def get_root():
-    return "Welcome to my Python API!!!"
+    return "Welcome to my Face Detection API!!!"
 
 
-@app.post('/task', response_model=TaskOut)
-async def do_task(request: TaskIn):
-    my_string = request.my_string
-
-    return {"message": my_string}
-
-
-@app.post('/faceDetection', response_model=FaceDetectionOut)
+@app.post('/detect_face', response_model=FaceDetectionResponse)
 async def detect_face(image_file: UploadFile = File(...)):
 
     contents = await image_file.read()
+    img = Image.open(BytesIO(contents)).convert('RGB')
+    faces = face_processor.detect_faces(np.array(img))
+    img_byte_array = draw_face_boxes(img, faces)
 
-    image = decode_image(contents)
-
-    boxed_image = detector.detect_face_dlib(image=image)
-    boxed_image_bytes = encode_image(boxed_image)
-
-    return StreamingResponse(io.BytesIO(boxed_image_bytes),
+    return StreamingResponse(BytesIO(img_byte_array),
                              media_type="image/jpeg")
+
+
