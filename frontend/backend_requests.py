@@ -6,7 +6,7 @@ IP_ADDRESS = os.environ.get('BACKEND_ADDRESS')
 
 def post_request_faceDetector(image: bytes):
 
-    url = f'http://{IP_ADDRESS}/faceDetection'
+    url = f'http://{IP_ADDRESS}/detect_face'
 
     # Send the POST request with the player name and image file
     response = requests.post(url,
