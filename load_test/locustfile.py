@@ -22,7 +22,7 @@ class MyUser(HttpUser):
     @tag("detect_face")
     @task
     def detect_face_request(self):
-        url = HOST + '/detect_face/'
+        url = HOST + '/detect_face'
         self.client.post(url, files={'image_file': example_image_bytes})
 
 
