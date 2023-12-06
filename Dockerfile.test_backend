@@ -3,14 +3,13 @@ FROM python:3.9-slim
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y git
-RUN pip install git+https://github.com/Asterios7/dlib-wrapper.git
-
-RUN pip install pytest
-RUN pip install httpx
+RUN pip install git+https://github.com/Asterios7/dlib-wrapper.git -q && \
+    pip install pytest -q && \
+    pip install httpx -q
 
 COPY ./backend/requirements.txt ./requirements.txt
 
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt -q
 
 COPY ./backend ./backend
 COPY ./tests ./tests
