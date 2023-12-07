@@ -4,7 +4,7 @@
 
 [**Overview**](#overview)
 | [**Prerequisites**](#Prerequisites)
-| [**How to use**](#how-to-use)
+| [**Deployment Instructions**](#Deployment-Instructions)
 | [**Testing**](#testing)
 
 ## Overview<a id="overview"></a>
@@ -31,7 +31,7 @@ Before getting started, ensure you have the following installed:
 - [minikube](https://minikube.sigs.k8s.io/docs/start/) (Required for Kubernetes deployment)
 - [kubectl](https://minikube.sigs.k8s.io/docs/handbook/kubectl/) (Required for Kubernetes deployment)
 
-## How to use<a id="how-to-use"></a>
+## Deployment Instructions<a id="Deployment-Instructions"></a>
 
 **Local Deployment Using Docker**
 
@@ -86,8 +86,24 @@ kubectl delete -f kubernetes/backend-service.yaml
 
 ## Testing<a id="testing"></a>
 
-For testing the code execute the run_tests.sh script with:
+**Code Testing**
 
-`bash run_test.sh`
+To test the FastAPI code, execute the run_tests.sh script:
 
+```bash
+bash run_test.sh
+```
+
+This script builds a Docker image dedicated to testing with pytest and runs the tests within a container. It ensures a consistent testing environment for the FastAPI codebase.
+
+**Load Testing**
+
+To perform load testing, use Locust (`pip install locust`) with the provided locustfile.py:
+
+```bash
 locust -f load_test/locustfile.py
+```
+
+This command initiates load testing using Locust, allowing you to simulate user behavior and analyze the performance of the FastAPI application under varying loads.
+
+Access the Locust UI at http://localhost:8089/ to monitor and manage the testing process.
