@@ -11,8 +11,3 @@ faces = face_processor.detect_faces(np.array(image))
 def test_draw_face_boxes():
     img_byte_array = draw_face_boxes(image, faces)
     assert isinstance(img_byte_array, bytes)
-
-
-
-
-
