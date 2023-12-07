@@ -1,40 +1,96 @@
 ![Tests](https://github.com/Asterios7/kub-fastapi/actions/workflows/tests.yaml/badge.svg)
 
-# Fastapi - Kubernetes
+# kub-fastapi
+
+A face detection fastapi that can be delpoyed with Docker Compose or Kubernetes
 
 [**Overview**](#overview)
-| [**Requirements**](#requirements)
+| [**Prerequisites**](#Prerequisites)
 | [**How to use**](#how-to-use)
 | [**Testing**](#testing)
 
 ## Overview<a id="overview"></a>
 
-A fastapi face detection application
+This repository contains a Face Detection API built with FastAPI, deployable via Docker Compose and Kubernetes. The application processes images, highlighting detected faces by drawing bounding boxes around them.
 
-## Requirements<a id="requirements"></a>
+#### Features
 
-Things to install
+- FastAPI Face Detection: Utilizes FastAPI to provide face detection functionality.
+- Deployment Options:
+  - Docker Compose: Easily deploy using Docker Compose.
+  - Kubernetes: Enables deployment on Kubernetes clusters.
+- Streamlit Interface: Docker Compose deployment includes a Streamlit interface for user interaction.
 
-- Docker
-- minikube (Optional, only for Kubernetes)
-- kubectl (Optional, only for Kubernetes)
+#### Functionality
+
+Upon providing an image, the API returns the same image with bounding boxes indicating the detected faces.
+
+## Prerequisites<a id="Prerequisites"></a>
+
+Before getting started, ensure you have the following installed:
+
+- [Docker](https://docs.docker.com/engine/install/)
+- [minikube](https://minikube.sigs.k8s.io/docs/start/) (Required for Kubernetes deployment)
+- [kubectl](https://minikube.sigs.k8s.io/docs/handbook/kubectl/) (Required for Kubernetes deployment)
 
 ## How to use<a id="how-to-use"></a>
 
-For starting the app:
+#### Local Deployment
 
-1. Open a terminal
-2. Go to /path/to/kub-fastapi
-3. Execute `docker compose up --build`
-4. Open browser at http://localhost:8501/
-5. Upload a picture
+**Using Docker**
 
-For stopping the app from the same terminal path execute:
+- Start the App:
 
-`docker compose down`
+```bash
+cd /path/to/kub-fastapi
+docker compose up --build
+```
+
+    Access the app:
+    - Streamlit: http://localhost:8501/
+    - FastAPI: http://localhost:8000/
+
+- Stop the App:
+
+```bash
+docker compose down
+```
+
+**Using Kubernetes**
+
+- Start Minikube:
+
+```bash
+minikube start
+```
+
+Verify status:
+
+```bash
+minikube status
+```
+
+- Deploy to Kubernetes:
+
+```bash
+kubectl apply -f kubernetes/backend-deployment.yaml
+kubectl apply -f kubernetes/backend-service.yaml
+minikube service backend-service
+```
+
+Access the API using the provided port of minikube service.
+
+- Cleanup:
+
+```bash
+kubectl delete -f kubernetes/backend-deployment.yaml
+kubectl delete -f kubernetes/backend-service.yaml
+```
 
 ## Testing<a id="testing"></a>
 
 For testing the code execute the run_tests.sh script with:
 
 `bash run_test.sh`
+
+locust -f load_test/locustfile.py
