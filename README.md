@@ -2,8 +2,6 @@
 
 # kub-fastapi
 
-A face detection fastapi that can be delpoyed with Docker Compose or Kubernetes
-
 [**Overview**](#overview)
 | [**Prerequisites**](#Prerequisites)
 | [**How to use**](#how-to-use)
@@ -35,30 +33,29 @@ Before getting started, ensure you have the following installed:
 
 ## How to use<a id="how-to-use"></a>
 
-#### Local Deployment
+**Local Deployment Using Docker**
 
-**Using Docker**
-
-- Start the App:
+1. Start the App:
 
 ```bash
 cd /path/to/kub-fastapi
 docker compose up --build
 ```
 
-    Access the app:
-    - Streamlit: http://localhost:8501/
-    - FastAPI: http://localhost:8000/
+2. Access the app:
 
-- Stop the App:
+   - Streamlit: http://localhost:8501/
+   - FastAPI: http://localhost:8000/
+
+3. Stop the App:
 
 ```bash
 docker compose down
 ```
 
-**Using Kubernetes**
+**Local Deployment Using Kubernetes**
 
-- Start Minikube:
+1. Start Minikube:
 
 ```bash
 minikube start
@@ -70,7 +67,7 @@ Verify status:
 minikube status
 ```
 
-- Deploy to Kubernetes:
+2. Deploy to Kubernetes:
 
 ```bash
 kubectl apply -f kubernetes/backend-deployment.yaml
@@ -80,7 +77,7 @@ minikube service backend-service
 
 Access the API using the provided port of minikube service.
 
-- Cleanup:
+3. Cleanup:
 
 ```bash
 kubectl delete -f kubernetes/backend-deployment.yaml
