@@ -12,11 +12,11 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
-    container: 
+    container:
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Run tests
-        run: bash run_tests.sh      
+        run: bash run_tests.sh

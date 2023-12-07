@@ -1,2 +1,0 @@
-docker build -t asterios7/kub-fastapi .
-docker push asterios7/kub-fastapi

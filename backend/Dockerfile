@@ -1,16 +1,15 @@
-FROM python:3.9
+FROM python:3.9-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
-RUN pip install deepface==0.0.78
-RUN pip install fastapi==0.95.1
+RUN apt-get update && apt-get install -y git
+RUN pip install git+https://github.com/Asterios7/dlib-wrapper.git
 
 COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY . ./backend
+COPY . .
 
 EXPOSE 8000
 
@@ -18,4 +17,4 @@ ENTRYPOINT ["uvicorn"]
 
 # CMD ["main:app", "--host", "0.0.0.0"]
 
-CMD ["backend.main:app", "--host", "0.0.0.0", "--reload"]
+CMD ["main:app", "--host", "0.0.0.0", "--reload"]

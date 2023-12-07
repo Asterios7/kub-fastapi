@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: backend-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: backend
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend-fastapi
-          image: asterios7/kub-backend:latest
+          image: asterios7/face-detection-api:latest
           livenessProbe:
             httpGet:
               path: /
